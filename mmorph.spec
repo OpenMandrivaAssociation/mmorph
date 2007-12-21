@@ -16,6 +16,7 @@ Group:		Sciences/Computer science
 BuildRequires:	db4-devel
 BuildRequires:	bison
 BuildRequires:	flex
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 A replacement for the old unix crypt(1) command. Mcrypt
