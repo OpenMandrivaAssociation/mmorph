@@ -8,8 +8,8 @@ Version:	%{version}
 Release:	%{release}
 Summary:	Morphology tool
 Source:		%{name}-%{version_orig}.tar.bz2
-Patch0:		%{name}-%{version}.autoconf.patch.bz2
-Patch1:		%{name}-%{version}.code.patch.bz2
+Patch0:		%{name}-%{version}.autoconf.patch
+Patch1:		%{name}-%{version}.code.patch
 Patch2:		%{name}-%{version}-fix-build.patch
 URL:		http://www.issco.unige.ch/tools
 License:	GPL
