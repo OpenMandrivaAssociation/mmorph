@@ -1,7 +1,7 @@
 %define name		mmorph
 %define version		2.3.4.2
 %define version_orig	2.3.4_2
-%define release		%mkrel 4
+%define release		%mkrel 6
 
 Name:		%{name}
 Version:	%{version}
@@ -10,6 +10,7 @@ Summary:	Morphology tool
 Source:		%{name}-%{version_orig}.tar.bz2
 Patch0:		%{name}-%{version}.autoconf.patch.bz2
 Patch1:		%{name}-%{version}.code.patch.bz2
+Patch2:		%{name}-%{version}-fix-build.patch
 URL:		http://www.issco.unige.ch/tools
 License:	GPL
 Group:		Sciences/Computer science
@@ -31,10 +32,11 @@ CBC, ECB, OFB and CFB modes of encryption are supported.
 %setup -q -n %{name}-%{version_orig}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 autoconf
 
 %build
-%configure
+%configure2_5x
 %make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
