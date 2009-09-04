@@ -1,7 +1,7 @@
 %define name		mmorph
 %define version		2.3.4.2
 %define version_orig	2.3.4_2
-%define release		%mkrel 8
+%define release		%mkrel 9
 
 Name:		%{name}
 Version:	%{version}
