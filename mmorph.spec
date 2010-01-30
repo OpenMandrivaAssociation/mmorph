@@ -11,6 +11,7 @@ Source:		%{name}-%{version_orig}.tar.bz2
 Patch0:		%{name}-%{version}.autoconf.patch
 Patch1:		%{name}-%{version}.code.patch
 Patch2:		%{name}-%{version}-fix-build.patch
+Patch3:		mmorph-2.3.4.2-sys_errlist.patch
 URL:		http://www.issco.unige.ch/tools
 License:	GPL
 Group:		Sciences/Computer science
@@ -33,11 +34,12 @@ CBC, ECB, OFB and CFB modes of encryption are supported.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 autoconf
 
 %build
 %configure2_5x
-%make CFLAGS="$RPM_OPT_FLAGS"
+%make CFLAGS="%optflags"
 
 %install
 rm -rf %{buildroot}
