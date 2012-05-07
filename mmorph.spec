@@ -1,7 +1,7 @@
 %define name		mmorph
 %define version		2.3.4.2
 %define version_orig	2.3.4_2
-%define release		11
+%define release		12
 
 Name:		%{name}
 Version:	%{version}
