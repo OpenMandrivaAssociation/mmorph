@@ -1,7 +1,7 @@
 %define name		mmorph
 %define version		2.3.4.2
 %define version_orig	2.3.4_2
-%define release		%mkrel 10
+%define release		11
 
 Name:		%{name}
 Version:	%{version}
@@ -15,7 +15,7 @@ Patch3:		mmorph-2.3.4.2-sys_errlist.patch
 URL:		http://www.issco.unige.ch/tools
 License:	GPL
 Group:		Sciences/Computer science
-BuildRequires:	db4-devel
+BuildRequires:	db-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRoot:	%{_tmppath}/%{name}-%{version}
