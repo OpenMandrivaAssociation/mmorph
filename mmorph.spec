@@ -39,13 +39,13 @@ autoconf
 
 %build
 %configure2_5x
-%make CFLAGS="%optflags"
+%make CFLAGS="%optflags" DBINCLUDEDIR=/usr/include/db53
 
 %install
 rm -rf %{buildroot}
 install -d -m 755 %{buildroot}%{_mandir}
 install -d -m 755 %{buildroot}%{_bindir}
-%makeinstall MANDIR=%{buildroot}%{_mandir} BINDIR=%{buildroot}%{_bindir}
+%makeinstall MANDIR=%{buildroot}%{_mandir} BINDIR=%{buildroot}%{_bindir} 
 
 %clean
 rm -rf %{buildroot}
