@@ -1,0 +1,26 @@
+diff -Naur mmorph-2.3.4_2/configure.in mmorph-2.3.4_2.new/configure.in
+--- mmorph-2.3.4_2/configure.in	1995-07-11 15:30:12.000000000 +0200
++++ mmorph-2.3.4_2.new/configure.in	2005-03-02 17:53:46.095688470 +0100
+@@ -8,8 +8,8 @@
+ dnl AC_PROG_YACC
+ dnl prefer yacc to bison to byacc:
+ AC_CHECK_PROG(BYACC, byacc, byacc)
+-AC_CHECK_PROG(BISON, bison, bison -y, BYACC)
+-AC_CHECK_PROG(YACC, yacc, yacc, BISON)
++AC_CHECK_PROG(BISON, bison, bison -y, $BYACC)
++AC_CHECK_PROG(YACC, yacc, yacc, $BISON)
+ dnl prefer gcc to local cc
+ AC_PROG_CC
+ dnl prefer local cc to gcc:
+diff -Naur mmorph-2.3.4_2/Makefile.in mmorph-2.3.4_2.new/Makefile.in
+--- mmorph-2.3.4_2/Makefile.in	1995-07-11 15:30:12.000000000 +0200
++++ mmorph-2.3.4_2.new/Makefile.in	2005-03-02 17:53:46.095688470 +0100
+@@ -41,7 +41,7 @@
+ # directory containing libdb.a
+ DBLIBDIR=$(USRLOCALDIR)/lib
+ # directory containing db.h
+-DBINCLUDEDIR=$(USRLOCALDIR)/include
++DBINCLUDEDIR=$(USRLOCALDIR)/include/db4
+ 
+ # need flex, lex does not handle 8 bit character codes
+ LEX=flex

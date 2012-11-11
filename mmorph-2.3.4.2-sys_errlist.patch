@@ -1,0 +1,10 @@
+--- mymalloc.c.orig	2010-01-30 18:12:35.000000000 +0100
++++ mymalloc.c	2010-01-30 18:12:40.000000000 +0100
+@@ -15,7 +15,6 @@
+ #include <errno.h>
+ #include "mymalloc.h"
+ extern int  sys_nerr;
+-extern char *sys_errlist[];
+ 
+ /* extern char *strdup();*/
+ 

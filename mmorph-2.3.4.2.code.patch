@@ -1,0 +1,161 @@
+diff -Naur mmorph-2.3.4_2/bitmap.h mmorph-2.3.4_2.renew/bitmap.h
+--- mmorph-2.3.4_2/bitmap.h	1995-11-01 12:47:28.000000000 +0100
++++ mmorph-2.3.4_2.renew/bitmap.h	2005-03-02 17:58:12.635691438 +0100
+@@ -9,7 +9,9 @@
+ 
+ #include "config.h"
+ #include <values.h>
++#include <limits.h>
+ 
++#define BITS(t) (sizeof(t)*CHAR_BIT)
+ #define WORD_TYPE	unsigned long
+ #define WORD_SIZE	BITS(WORD_TYPE)
+ #define MODULO_MASK	(WORD_SIZE-1)
+diff -Naur mmorph-2.3.4_2/database.c mmorph-2.3.4_2.renew/database.c
+--- mmorph-2.3.4_2/database.c	1997-01-09 15:10:39.000000000 +0100
++++ mmorph-2.3.4_2.renew/database.c	2005-03-02 18:17:33.547538372 +0100
+@@ -27,7 +27,7 @@
+ #endif
+ #endif
+ 
+-#include <db.h>
++#include <db_185.h>
+ #include <fcntl.h>
+ #include <netinet/in.h>
+ #include "mymalloc.h"
+diff -Naur mmorph-2.3.4_2/output.c mmorph-2.3.4_2.renew/output.c
+--- mmorph-2.3.4_2/output.c	1995-11-01 12:47:54.000000000 +0100
++++ mmorph-2.3.4_2.renew/output.c	2005-03-02 18:03:31.498177604 +0100
+@@ -8,7 +8,7 @@
+     handle all printing
+ */
+ 
+-#include <varargs.h>
++#include <stdarg.h>
+ #include <ctype.h>
+ #include "user.h"
+ #include "output.h"
+@@ -23,15 +23,12 @@
+ 
+ /*VARARGS*/
+ void
+-fatal_error(va_alist)
+-va_dcl
++fatal_error(char *format, ...)
+ 
+ {
+     va_list     ap;
+-    char       *format;
+ 
+-    va_start(ap);
+-    format = va_arg(ap, char *);
++    va_start(ap, format);
+     (void) fflush(outfile);
+     if (parsing) {
+ 	if (fprintf(logfile,
+@@ -56,15 +53,12 @@
+ 
+ /*VARARGS*/
+ void
+-print_warning(va_alist)
+-va_dcl
++print_warning(char *format, ...)
+ 
+ {
+     va_list     ap;
+-    char       *format;
+ 
+-    va_start(ap);
+-    format = va_arg(ap, char *);
++    va_start(ap, format);
+     (void) fflush(outfile);
+     if (fprintf(logfile, "Warning: ") == EOF)
+ 	EXIT(3);
+@@ -77,15 +71,12 @@
+ 
+ /*VARARGS*/
+ void
+-print_out(va_alist)
+-va_dcl
++print_out(char *format, ...)
+ 
+ {
+     va_list     ap;
+-    char       *format;
+ 
+-    va_start(ap);
+-    format = va_arg(ap, char *);
++    va_start(ap, format);
+     if (vfprintf(outfile, format, ap) == EOF)
+ 	EXIT(3);
+     va_end(ap);
+@@ -99,15 +90,12 @@
+ 
+ /*VARARGS*/
+ void
+-print_log(va_alist)
+-va_dcl
++print_log(char *format, ...)
+ 
+ {
+     va_list     ap;
+-    char       *format;
+ 
+-    va_start(ap);
+-    format = va_arg(ap, char *);
++    va_start(ap, format);
+     if (vfprintf(logfile, format, ap) == EOF)
+ 	EXIT(3);
+     va_end(ap);
+@@ -115,17 +103,12 @@
+ 
+ /*VARARGS*/
+ void
+-print(va_alist)
+-va_dcl
++print(FILE *file, char *format, ...)
+ 
+ {
+     va_list     ap;
+-    char       *format;
+-    FILE       *file;
+ 
+-    va_start(ap);
+-    file = va_arg(ap, FILE *);
+-    format = va_arg(ap, char *);
++    va_start(ap, format);
+     if (vfprintf(file, format, ap) == EOF)
+ 	EXIT(3);
+     va_end(ap);
+diff -Naur mmorph-2.3.4_2/output.h mmorph-2.3.4_2.renew/output.h
+--- mmorph-2.3.4_2/output.h	1995-11-01 12:47:56.000000000 +0100
++++ mmorph-2.3.4_2.renew/output.h	2005-03-02 18:18:26.755037981 +0100
+@@ -17,12 +17,12 @@
+ extern FILE *rejectfile;
+ extern char *prompt;
+ 
+-extern void fatal_error( /* va_alist */ );
+-extern void print_warning( /* va_alist */ );
++extern void fatal_error(char *format, ...);
++extern void print_warning(char *format, ...);
+ extern void flush_out();
+-extern void print_out( /* va_alist */ );
+-extern void print_log( /* va_alist */ );
+-extern void print( /* va_alist */ );
++extern void print_out(char *format, ...);
++extern void print_log(char *format, ...);
++extern void print(FILE *file, char *format, ...);
+ extern void print_string();
+ extern void print_string_l();
+ extern void print_letter();
+diff -Naur mmorph-2.3.4_2/user.h mmorph-2.3.4_2.renew/user.h
+--- mmorph-2.3.4_2/user.h	1995-11-01 12:48:20.000000000 +0100
++++ mmorph-2.3.4_2.renew/user.h	2005-03-02 18:00:18.730623989 +0100
+@@ -16,7 +16,6 @@
+ 
+ /* because they may not be declared in errno.h: */
+ extern int  sys_nerr;
+-extern char *sys_errlist[];
+ 
+ #ifndef FALSE
+ #define FALSE   (0)

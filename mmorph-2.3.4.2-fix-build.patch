@@ -1,0 +1,11 @@
+diff -Naur mmorph-2.3.4_2/tokenize.l mmorph-2.3.4_2-fix-build/tokenize.l
+--- mmorph-2.3.4_2/tokenize.l	1995-11-01 12:48:14.000000000 +0100
++++ mmorph-2.3.4_2-fix-build/tokenize.l	2007-12-22 12:47:48.000000000 +0100
+@@ -19,7 +19,6 @@
+ 
+ #define NUL '\0'
+ 
+-int	yylineno = 1;
+ int	linepos = 0;
+ static char	buf_str[MAXSTRLNG];
+ static char   *pbuf_str;
