@@ -12,7 +12,7 @@ Patch0:		%{name}-%{version}.autoconf.patch
 Patch1:		%{name}-%{version}.code.patch
 Patch2:		%{name}-%{version}-fix-build.patch
 Patch3:		mmorph-2.3.4.2-sys_errlist.patch
-URL:		http://www.issco.unige.ch/tools
+URL:		https://www.issco.unige.ch/tools
 License:	GPL
 Group:		Sciences/Computer science
 BuildRequires:	db-devel
